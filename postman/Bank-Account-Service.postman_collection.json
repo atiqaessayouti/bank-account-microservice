@@ -1,0 +1,101 @@
+{
+  "info": {
+    "name": "Bank Account Service TP",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8085"
+    },
+    {
+      "key": "compteId",
+      "value": "REMPLACER_PAR_ID"
+    }
+  ],
+  "item": [
+    {
+      "name": "Lister comptes",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/comptes",
+        "header": []
+      }
+    },
+    {
+      "name": "Créer compte",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/comptes",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"solde\": 15000, \"type\": \"COURANT\"}"
+        }
+      }
+    },
+    {
+      "name": "Lire compte",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/comptes/{{compteId}}",
+        "header": []
+      }
+    },
+    {
+      "name": "Modifier compte",
+      "request": {
+        "method": "PUT",
+        "url": "{{baseUrl}}/api/comptes/{{compteId}}",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"solde\": 25000, \"type\": \"EPARGNE\"}"
+        }
+      }
+    },
+    {
+      "name": "Supprimer compte",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/comptes/{{compteId}}",
+        "header": []
+      }
+    },
+    {
+      "name": "Spring Data REST projection",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/data-rest/comptes?projection=solde",
+        "header": []
+      }
+    },
+    {
+      "name": "GraphQL liste",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/graphql",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"query\": \"{ allComptes { id solde type dateCreation } }\"}"
+        }
+      }
+    }
+  ]
+}
